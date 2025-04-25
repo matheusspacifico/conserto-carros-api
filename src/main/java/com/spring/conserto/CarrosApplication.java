@@ -1,4 +1,4 @@
-package com.prw3.carros;
+package com.spring.conserto;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

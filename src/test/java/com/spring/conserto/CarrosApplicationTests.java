@@ -1,4 +1,4 @@
-package com.prw3.carros;
+package com.spring.conserto;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
