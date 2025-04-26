@@ -4,6 +4,7 @@ import com.spring.conserto.model.veiculo.Marca;
 import java.time.LocalDate;
 
 public record ConsertoListagemDTO(
+        Long id,
         LocalDate dataEntradaOficina,
         LocalDate dataSaidaOficina,
         String nomeMecanico,
@@ -12,6 +13,7 @@ public record ConsertoListagemDTO(
 ) {
         public ConsertoListagemDTO(Conserto conserto) {
                 this(
+                        conserto.getId(),
                         conserto.getDataEntradaOficina(),
                         conserto.getDataSaidaOficina(),
                         conserto.getMecanicoResponsavel().getNome(),
