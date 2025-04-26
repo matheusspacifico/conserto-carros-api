@@ -36,4 +36,13 @@ public class Conserto {
         this.mecanicoResponsavel = new Mecanico(consertoDTO.mecanicoResponsavel());
         this.veiculoResponsavel = new Veiculo(consertoDTO.veiculoResponsavel());
     }
+
+    public void atualizarInformacoes(ConsertoAtualizacaoDTO consertoAtualizacaoDTO) {
+        if (consertoAtualizacaoDTO.dataSaidaOficina() != null) {
+            this.dataSaidaOficina = consertoAtualizacaoDTO.dataSaidaOficina();
+        }
+        if (consertoAtualizacaoDTO.nomeMecanico() != null && consertoAtualizacaoDTO.anosExperiencia() > 0) {
+            this.mecanicoResponsavel = new Mecanico(consertoAtualizacaoDTO.nomeMecanico(), consertoAtualizacaoDTO.anosExperiencia());
+        }
+    }
 }
