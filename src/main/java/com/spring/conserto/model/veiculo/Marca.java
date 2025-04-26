@@ -10,4 +10,5 @@ public enum Marca {
     NISSAN,
     PORSCHE,
     KIA,
+    FIAT,
 }
