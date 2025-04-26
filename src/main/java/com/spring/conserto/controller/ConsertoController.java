@@ -50,7 +50,7 @@ public class ConsertoController {
             return ResponseEntity.ok(new ConsertoRetornoDTO(conserto));
         }
 
-        return ResponseEntity.<ConsertoRetornoDTO>notFound().build();
+        return ResponseEntity.notFound().build();
     }
 
     @PutMapping
