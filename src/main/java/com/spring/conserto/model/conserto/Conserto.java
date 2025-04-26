@@ -47,4 +47,8 @@ public class Conserto {
             this.mecanicoResponsavel = new Mecanico(consertoAtualizacaoDTO.nomeMecanico(), consertoAtualizacaoDTO.anosExperiencia());
         }
     }
+
+    public void cancelarConserto() {
+        this.ativo = false;
+    }
 }

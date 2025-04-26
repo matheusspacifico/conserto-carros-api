@@ -60,7 +60,10 @@ public class ConsertoController {
         conserto.atualizarInformacoes(consertoAtualizacaoDTO);
     }
 
-
-
-
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluirConserto(@PathVariable Long id) {
+        Conserto conserto = repository.getReferenceById(id);
+        conserto.cancelarConserto();
+    }
 }
