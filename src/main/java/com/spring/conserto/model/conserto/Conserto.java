@@ -29,12 +29,14 @@ public class Conserto {
 
     @Embedded
     private Veiculo veiculoResponsavel;
+    private Boolean ativo;
 
     public Conserto(ConsertoDTO consertoDTO) {
         this.dataEntradaOficina = consertoDTO.dataEntradaOficina();
         this.dataSaidaOficina = consertoDTO.dataSaidaOficina();
         this.mecanicoResponsavel = new Mecanico(consertoDTO.mecanicoResponsavel());
         this.veiculoResponsavel = new Veiculo(consertoDTO.veiculoResponsavel());
+        this.ativo = true;
     }
 
     public void atualizarInformacoes(ConsertoAtualizacaoDTO consertoAtualizacaoDTO) {
