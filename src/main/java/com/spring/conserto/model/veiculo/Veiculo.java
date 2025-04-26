@@ -17,11 +17,14 @@ public class Veiculo {
     private Marca marca;
 
     private String modelo;
-    private int ano;
+    private String ano;
+
+    private String cor;
 
     public Veiculo(VeiculoDTO veiculoDTO) {
         this.marca = veiculoDTO.marca();
         this.modelo = veiculoDTO.modelo();
         this.ano = veiculoDTO.ano();
+        this.cor = veiculoDTO.cor();
     }
 }
