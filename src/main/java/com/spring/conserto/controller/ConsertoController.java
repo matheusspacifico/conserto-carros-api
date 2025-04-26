@@ -5,6 +5,7 @@ import com.spring.conserto.repository.ConsertoRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class ConsertoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrarConserto(@RequestBody @Valid ConsertoDTO consertoDTO, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<ConsertoRetornoDTO> cadastrarConserto(@RequestBody @Valid ConsertoDTO consertoDTO, UriComponentsBuilder uriBuilder) {
         Conserto conserto = new Conserto(consertoDTO);
         repository.save(conserto);
 
@@ -31,17 +32,17 @@ public class ConsertoController {
     }
 
     @GetMapping
-    public ResponseEntity listarTodosOsConsertos(Pageable pageable) {
+    public ResponseEntity<Page<Conserto>> listarTodosOsConsertos(Pageable pageable) {
         return ResponseEntity.ok(repository.findAll(pageable));
     }
 
     @GetMapping("algunsdados")
-    public ResponseEntity listarAlgunsDados() {
+    public ResponseEntity<List<ConsertoListagemDTO>> listarAlgunsDados() {
         return ResponseEntity.ok(repository.findAllByAtivoTrue().stream().map(ConsertoListagemDTO::new).toList());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity listarConsertoPorId(@PathVariable Long id) {
+    public ResponseEntity<ConsertoRetornoDTO> listarConsertoPorId(@PathVariable Long id) {
         Optional<Conserto> consertoOptional = repository.findById(id);
 
         if (consertoOptional.isPresent()) {
@@ -49,12 +50,12 @@ public class ConsertoController {
             return ResponseEntity.ok(new ConsertoRetornoDTO(conserto));
         }
 
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.<ConsertoRetornoDTO>notFound().build();
     }
 
     @PutMapping
     @Transactional
-    public ResponseEntity atualizarConserto(@RequestBody @Valid ConsertoAtualizacaoDTO consertoAtualizacaoDTO) {
+    public ResponseEntity<ConsertoRetornoDTO> atualizarConserto(@RequestBody @Valid ConsertoAtualizacaoDTO consertoAtualizacaoDTO) {
         Conserto conserto = repository.getReferenceById(consertoAtualizacaoDTO.id());
         conserto.atualizarInformacoes(consertoAtualizacaoDTO);
 
@@ -63,7 +64,7 @@ public class ConsertoController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity excluirConserto(@PathVariable Long id) {
+    public ResponseEntity<Void> excluirConserto(@PathVariable Long id) {
         Conserto conserto = repository.getReferenceById(id);
         conserto.cancelarConserto();
 
