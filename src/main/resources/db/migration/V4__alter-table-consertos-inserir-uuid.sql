@@ -1,0 +1,9 @@
+ALTER TABLE consertos
+ADD COLUMN uuid VARCHAR(36) NOT NULL DEFAULT RANDOM_UUID();
+
+UPDATE consertos
+SET uuid = RANDOM_UUID()
+WHERE uuid IS NULL;
+
+ALTER TABLE consertos
+ADD CONSTRAINT uk_consertos_uuid UNIQUE(uuid);
