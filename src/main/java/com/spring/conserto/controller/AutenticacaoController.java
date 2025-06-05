@@ -1,6 +1,8 @@
 package com.spring.conserto.controller;
 
 import com.spring.conserto.model.autenticacao.AutenticacaoDTO;
+import com.spring.conserto.model.autenticacao.Usuario;
+import com.spring.conserto.util.security.ConsertoCarrosTokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +20,15 @@ public class AutenticacaoController {
     @Autowired
     private AuthenticationManager manager;
 
+    @Autowired
+    private ConsertoCarrosTokenService tokenService;
+
     @PostMapping
     public ResponseEntity efetuarLogin(@RequestBody @Valid AutenticacaoDTO dados) {
         var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
         var authentication = manager.authenticate(token);
 
-        return ResponseEntity.ok().body(authentication);
+        return ResponseEntity.ok(
+                tokenService.gerarToken((Usuario) authentication.getPrincipal()));
     }
 }
