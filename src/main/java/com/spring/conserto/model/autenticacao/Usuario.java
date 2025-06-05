@@ -1,4 +1,4 @@
-package com.spring.conserto.model.usuario;
+package com.spring.conserto.model.autenticacao;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

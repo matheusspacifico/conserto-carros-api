@@ -1,6 +1,6 @@
 package com.spring.conserto.repository;
 
-import com.spring.conserto.model.usuario.Usuario;
+import com.spring.conserto.model.autenticacao.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 
