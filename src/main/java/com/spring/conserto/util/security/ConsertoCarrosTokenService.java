@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.spring.conserto.model.autenticacao.Usuario;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -13,9 +14,12 @@ import java.time.ZoneOffset;
 @Service
 public class ConsertoCarrosTokenService {
 
+    @Value("${conserto.carros.senha.principal.geracao.token}")
+    private String secret;
+
     public String gerarToken(Usuario usuario) {
         try {
-            var algorithm = Algorithm.HMAC256("12345678");
+            var algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("Conserto de Carros API")
                     .withSubject(usuario.getLogin())
