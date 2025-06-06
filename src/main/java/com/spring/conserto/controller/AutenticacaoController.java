@@ -5,7 +5,6 @@ import com.spring.conserto.model.autenticacao.Usuario;
 import com.spring.conserto.util.security.ConsertoCarrosTokenDTO;
 import com.spring.conserto.util.security.ConsertoCarrosTokenService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,12 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/login")
 public class AutenticacaoController {
+    private final AuthenticationManager manager;
+    private final ConsertoCarrosTokenService tokenService;
 
-    @Autowired
-    private AuthenticationManager manager;
-
-    @Autowired
-    private ConsertoCarrosTokenService tokenService;
+    public AutenticacaoController(AuthenticationManager manager, ConsertoCarrosTokenService tokenService) {
+        this.manager = manager;
+        this.tokenService = tokenService;
+    }
 
     @PostMapping
     public ResponseEntity<ConsertoCarrosTokenDTO> efetuarLogin(@RequestBody @Valid AutenticacaoDTO dados) {
