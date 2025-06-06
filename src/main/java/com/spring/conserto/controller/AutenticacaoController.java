@@ -25,7 +25,7 @@ public class AutenticacaoController {
     private ConsertoCarrosTokenService tokenService;
 
     @PostMapping
-    public ResponseEntity efetuarLogin(@RequestBody @Valid AutenticacaoDTO dados) {
+    public ResponseEntity<ConsertoCarrosTokenDTO> efetuarLogin(@RequestBody @Valid AutenticacaoDTO dados) {
         var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
         var authentication = manager.authenticate(token);
 
