@@ -1,6 +1,7 @@
 package com.spring.conserto.util.security;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.spring.conserto.model.autenticacao.Usuario;
@@ -28,6 +29,19 @@ public class ConsertoCarrosTokenService {
 
         } catch (JWTCreationException e) {
             throw new RuntimeException("Erro ao gerar token", e);
+        }
+    }
+
+    public String getSubject(String tokenJWT) {
+        try {
+            var algorithm = Algorithm.HMAC256(secret);
+            JWTVerifier verifier = JWT.require(algorithm)
+                    .withIssuer("Conserto de Carros API")
+                    .build();
+
+            return verifier.verify(tokenJWT).getSubject();
+        } catch (JWTCreationException e) {
+            throw new RuntimeException("Token JWT inválido ou expirado!", e);
         }
     }
 
