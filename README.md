@@ -8,6 +8,7 @@ A Spring Boot REST API for managing car repairs in a workshop. This application 
 - **Spring Boot 3.4.5**
 - **Spring Data JPA** - For database access and ORM
 - **Spring Validation** - For input validation
+- **Spring Security** - For login authentication
 - **H2 Database** - Embedded database for data storage
 - **Flyway** - For database migrations
 - **Lombok** - For reducing boilerplate code
@@ -22,28 +23,11 @@ A Spring Boot REST API for managing car repairs in a workshop. This application 
 - Soft delete functionality (marking records as inactive)
 - Pagination support for listing repairs
 
-## Setup Instructions
-
-1. Ensure you have Java 21 installed
-2. Clone this repository
-3. Build the project using Maven:
-   ```
-   ./mvnw clean install
-   ```
-4. Run the application:
-   ```
-   ./mvnw spring-boot:run
-   ```
-5. The API will be available at `http://localhost:8080`
-6. H2 Console is available at `http://localhost:8080/h2-console` with the following settings:
-   - JDBC URL: `jdbc:h2:file:./DATA/conserto-api`
-   - Username: `sa`
-   - Password: (leave empty)
-
 ## API Endpoints
 
 ### Repair Management
 
+- **POST /login** - Login into an existent user
 - **POST /consertos** - Create a new repair record
 - **GET /consertos** - List all repairs (paginated)
 - **GET /consertos/algunsdados** - List active repairs with limited data
@@ -98,4 +82,5 @@ The project follows a standard Spring Boot structure:
 - `controller` - REST controllers
 - `model` - Domain models and DTOs
 - `repository` - Data access interfaces
+- `util` - Error handling, and security stuff
 - `resources/db/migration` - Flyway database migrations
